@@ -12,16 +12,17 @@
   </button>
    <div v-if="inputbox" class="absolute top-0 right-0 text-[12px] bg-slate-200  shadow-inner  rounded-md ">
      <form @submit.prevent="handleComment" >
-       <input v-model="inputText" type="text" class="w-full h-full outline-none px-2 rounded-md shadow-inner" placeholder="write comment">
+       <input ref="inputref" v-model="inputText" type="text" class="inputarea w-full h-full outline-none px-2 rounded-md shadow-inner" placeholder="write comment">
      </form>
    </div>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup >
 import { useMyTestStore } from '~/store/testStore';
 const {element} = defineProps(['element'])
     const modal = ref<boolean>(true) ;
+    const inputref = ref<HTMLInputElement | null>()
     const init = ()=>{
       if(element.comment!==''){
          modal.value = false ;
@@ -33,6 +34,10 @@ const {element} = defineProps(['element'])
     const inputText = ref<string>('') ;
     const handleBox = ()=>{
         inputbox.value = !inputbox.value ;
+         nextTick(()=>{
+            inputref.value?.focus();
+         })
+        
     }
     const handleComment = ()=>{
          if(inputText.value.length>0){
