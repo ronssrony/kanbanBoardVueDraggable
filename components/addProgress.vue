@@ -14,10 +14,7 @@ import { useMyProgressStore } from '~/store/progressStore';
 const inputText = ref<string>(''); 
 const useProgress = useMyProgressStore() ;
  function handleSubmit():void{
-  console.log(inputText.value)
-
       useProgress.addItems(inputText.value); 
-      console.log(useProgress.progressItems, 'this is from store value')  
       inputText.value =''
  }
 </script>

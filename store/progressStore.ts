@@ -3,9 +3,8 @@ import { UsegetItem } from '#build/imports';
 import type dataType from '../interface/dataType'
 export const useMyProgressStore = defineStore('defineProgress', ()=>{
       const progressItems = ref<dataType[]>([]); 
-     
-      progressItems.value = UsegetItem("progress")
-    
+      progressItems.value = UsegetItem("progress"); 
+      
       const addItems = (value:string)=>{
             const existingProduct = progressItems.value.find(item=> item.name ===value) 
             if(existingProduct){
@@ -14,13 +13,12 @@ export const useMyProgressStore = defineStore('defineProgress', ()=>{
             else {
               progressItems.value?.push({name:value , comment:''}); 
               useSetItem("progress",progressItems.value)
+            
             } 
       }
       const addProgress = (value:dataType[])=>{
             useSetItem("progress" ,value) ;
       }
-   
-    
-
+      
       return { progressItems, addItems,  addProgress };
 })

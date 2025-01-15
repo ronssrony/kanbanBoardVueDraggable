@@ -2,7 +2,7 @@
  <div class="flex flex-col items-center w-80 rounded-xl relative bg-white min-h-40">
   <h1 class="bg-[#f48998] text-2xl w-full text-center rounded-tr-xl rounded-tl-xl  font-bold tracking-tighter px-5 py-2 text-black/75">In Progress</h1>
  
-   <Draggable drag-class="drag" ghost-class="ghost"  group="item" v-model="progress" itemKey="id" class="list flex flex-col gap-4 w-full h-full" >
+   <Draggable drag-class="drag" ghost-class="ghost"  group="item" v-model="progressStore.progressItems" itemKey="id" class="list flex flex-col gap-4 w-full h-full" >
       <template #item="{ element }" >
        <ElementCard :element="element"/>
       </template>
@@ -14,13 +14,14 @@
 
 import Draggable from "vuedraggable"
 import { useMyProgressStore } from "~/store/progressStore";
-import type dataType from '../interface/dataType'
+
 const progressStore = useMyProgressStore() ;
 
- const progress = ref<dataType[]>(progressStore.progressItems)
 
- watch(progress , ()=>{
-    progressStore.addProgress(progress.value)
+ 
+ watch(progressStore.progressItems , ()=>{
+   progressStore.addProgress(progressStore.progressItems)
+  
  },{deep:true})
  
 
